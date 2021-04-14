@@ -16,6 +16,7 @@ int main() {
     char c = '0';
     char buff_char = '0';
     int tabs = 0, cycle_deep = 0, max_deep = 0, tabs_flag = 0;
+    int cnt = 0;
     while (!feof(input)) {
         fscanf(input, "%s", buff);
         if (strcmp(buff, "}") == 0) {
@@ -59,4 +60,19 @@ int main() {
             }
         }
     }
+    
+    ///////////////////////////////////////////
+    rewind(output);
+    cnt = fun_cycle(recurs_funs);
+    printf("%d\n", cnt);
+
+    for (int k = 0; k < cnt; ++k)
+    {
+        printf("%s\n", recurs_funs[k]);
+    }
+    ///////////////////////////////////////////
+
+    fclose(input);
+    fclose(output);
+    return 0;
 }
