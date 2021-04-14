@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include "function_c.h"
 #define SIZE 100
 
 typedef struct string_ {
