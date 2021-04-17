@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "function_c.h"
+#include "afk_variable.h"
 #define SIZE 100
 
 typedef struct string_ {
