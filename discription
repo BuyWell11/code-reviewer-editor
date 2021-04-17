@@ -1,0 +1,3 @@
+Source.cpp - main file.
+afk_variable.cpp - function, which finds unused variables.
+function_c.cpp - function, which finds recursive functions.
