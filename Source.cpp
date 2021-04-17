@@ -72,7 +72,17 @@ int main() {
         printf("%s\n", recurs_funs[k]);
     }
     ///////////////////////////////////////////
+    ///////////////////////////////////////////
+    cnt = 0;
+    cnt = afk_var(vars);
+    printf("%d unused variable(-s):\n", cnt);
 
+    for (int k = 0; k < cnt; ++k)
+    {
+        printf("%s\n", vars[k]);
+    }
+    ///////////////////////////////////////////
+    
     fclose(input);
     fclose(output);
     return 0;
