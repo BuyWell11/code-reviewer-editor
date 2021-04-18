@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include "function_c.h"
 #include "afk_variable.h"
-#define SIZE 100
+#include "looping.h"
+#define SIZE 300
 
 typedef struct string_ {
     char str[SIZE];
@@ -17,8 +18,10 @@ int main() {
     char buff[SIZE] = { 0 };
     char c = '0';
     char buff_char = '0';
+    char recurs_funs[SIZE][SIZE] = { 0 };
+    char vars[SIZE][SIZE] = { 0 };
     int tabs = 0, cycle_deep = 0, max_deep = 0, tabs_flag = 0;
-    int cnt = 0;
+
     while (!feof(input)) {
         fscanf(input, "%s", buff);
         if (strcmp(buff, "}") == 0) {
@@ -62,11 +65,12 @@ int main() {
             }
         }
     }
-    
+
     ///////////////////////////////////////////
     rewind(output);
+    int cnt = 0;
     cnt = fun_cycle(recurs_funs);
-    printf("%d\n", cnt);
+    printf("%d recursive function(-s):\n", cnt);
 
     for (int k = 0; k < cnt; ++k)
     {
@@ -83,7 +87,21 @@ int main() {
         printf("%s\n", vars[k]);
     }
     ///////////////////////////////////////////
-    
+    ///////////////////////////////////////////
+    cnt = 0;
+    cnt = looping();
+
+    if (cnt == 1)
+    {
+        printf("Looping is here\n");
+    }
+    else
+    {
+        printf("Looping isn't here\n");
+    }
+    ///////////////////////////////////////////
+    printf("Maximum cycle length: %d", max_deep);
+
     fclose(input);
     fclose(output);
     return 0;
