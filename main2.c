@@ -2,9 +2,53 @@
 #include <stdio.h>
 #include <string.h>
 
-int main() { int count = 0; int arr[20][20] = 0; for (int i = 0;i<20;i++) { for (int j=0;j<20;j++) { count += i;
-            count += j;
-            printf("count = %d\n", count);
-        }
+int aboba(int a, int b)
+{
+    if (a > b)
+    {
+        aboba(a-1, b);
     }
+
+    return a;
+}
+
+int ab(int a, int b)
+{
+    if (a > b)
+    {
+        aboba(a - 1, b);
+    }
+}
+
+int boynextdoor(int a, int b)
+{
+    if (a < b)
+    {
+        boynextdoor(a, b - 2);
+    }
+}
+
+int main()
+{
+    int x = 1;
+    int t = 0;
+    char temp;
+    int a = 10;
+    int b = 7;
+
+    while (true)
+    {
+        x++;
+    }
+    while (1)
+    {
+        123;
+    }
+    for (;;) {
+        count += i;
+        break;
+    }
+
+    aboba(a, b);
+    boynextdoor(a - 2, b);
 }
