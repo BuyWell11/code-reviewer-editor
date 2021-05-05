@@ -25,6 +25,19 @@ int is_temp_fun(char temp[SIZE], char fun_name[SIZE])
     }
 }
 
+int is_fun_in_list(char fun_name[SIZE], char outp[][SIZE], int col)
+{
+    for (int k = 0; k < col; ++k)
+    {
+        if (strcmp(fun_name, outp[k]) == 0)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 
 int fun_cycle(char outp[][SIZE])
 {
@@ -33,18 +46,19 @@ int fun_cycle(char outp[][SIZE])
     int k = 0;
     int cnt = 0, cnt_open = 0, cnt_close = 0;
     int col = 0;
-    
+
     while (!feof(inp))
     {
         fscanf(inp, "%s", temp);
-        if (strcmp(temp, "main()") == 0)
-        {
-            fclose(inp);
-            return 0;
-        }
 
         if (strcmp(temp, "int") == 0 || strcmp(temp, "char") == 0 || strcmp(temp, "void") == 0 || strcmp(temp, "float") == 0 || strcmp(temp, "double") == 0)
         {
+            if (strcmp(temp, "main()") == 0)
+            {
+                fclose(inp);
+                return 0;
+            }
+
             fscanf(inp, "%s", temp);
             if (strchr(temp, '(') != 0)
             {
@@ -56,7 +70,7 @@ int fun_cycle(char outp[][SIZE])
                     k++;
                 }
 
-                while (cnt_open != cnt_close || cnt_open == 0 && cnt_open == 0)
+                while (cnt_open != cnt_close || cnt_open == 0 && cnt_close == 0)
                 {
                     fscanf(inp, "%s", temp);
 
@@ -68,18 +82,16 @@ int fun_cycle(char outp[][SIZE])
                     {
                         cnt_close++;
                     }
-                    else if (strchr(temp, '(') != 0 && is_temp_fun(temp, fun_name) == 1)
+                    else if (strchr(temp, '(') != 0 && is_temp_fun(temp, fun_name) == 1 && is_fun_in_list(fun_name, outp, col) == 0)
                     {
                         cnt++;
+                        strcpy(outp[col], fun_name);
+                        col++;
                     }
                 }
-
-                strcpy(outp[col], fun_name);
-                col++;
             }
             cnt_open = 0;
             cnt_close = 0;
-
             k = 0;
         }
     }
