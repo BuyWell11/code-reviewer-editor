@@ -6,7 +6,8 @@
 #include "function_c.h"
 #include "afk_variable.h"
 #include "looping.h"
-#include "useless_fun.h"
+#include "useless_func.h"
+#include "incorrect_name.h"
 #define SIZE 300
 
 typedef struct string_ {
@@ -21,7 +22,8 @@ int main() {
     char buff_char = '0';
     char recurs_funs[SIZE][SIZE] = { 0 };
     char vars[SIZE][SIZE] = { 0 };
-    char useless_func[SIZE][SIZE] = { 0 };
+    char useless_fun[SIZE][SIZE] = { 0 };
+    char incorrect_names[SIZE][SIZE] = { 0 };
     int tabs = 0, cycle_deep = 0, max_deep = 0, tabs_flag = 0, comm_flag = 0, comm_end_flag = 1, cycle_flag = 0;
 
     while (!feof(input)) {
@@ -126,13 +128,19 @@ int main() {
         printf("Looping isn't here\n");
     }
     ///////////////////////////////////////////
-    cnt = useless_fun(useless_func);
+    cnt = useless_func(useless_fun);
     printf("Useless func:\n");
     for (int i = 0; i < cnt; i++) {
-        printf("%s\n", useless_func[i]);
+        printf("%s\n", useless_fun[i]);
     }
     //////////////////////////////////////////////
-    printf("Maximum cycle length: %d", max_deep);
+    printf("Maximum cycle deep: %d\n", max_deep);
+    //////////////////////////////////////////
+    cnt = incorrect_name(incorrect_names);
+    printf("Incorrect names:\n");
+    for (int i = 0; i < cnt; i++) {
+        printf("%s\n", incorrect_names[i]);
+    }
 
     fclose(input);
     fclose(output);
