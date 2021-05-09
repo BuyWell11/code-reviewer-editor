@@ -6,7 +6,8 @@
 #include "function_c.h"
 #include "afk_variable.h"
 #include "looping.h"
-#include "useless_func.h"
+#include "vars_initialization.h"
+#include "useless_fun.h"
 #include "incorrect_name.h"
 #define SIZE 300
 
@@ -22,7 +23,8 @@ int main() {
     char buff_char = '0';
     char recurs_funs[SIZE][SIZE] = { 0 };
     char vars[SIZE][SIZE] = { 0 };
-    char useless_fun[SIZE][SIZE] = { 0 };
+    char vars_init_[SIZE][SIZE] = { 0 };
+    char useless_funс[SIZE][SIZE] = { 0 };
     char incorrect_names[SIZE][SIZE] = { 0 };
     int tabs = 0, cycle_deep = 0, max_deep = 0, tabs_flag = 0, comm_flag = 0, comm_end_flag = 1, cycle_flag = 0;
 
@@ -94,6 +96,7 @@ int main() {
         }
     }
 
+
     ///////////////////////////////////////////
     rewind(output);
     int cnt = 0;
@@ -106,17 +109,22 @@ int main() {
     }
     ///////////////////////////////////////////
     ///////////////////////////////////////////
-    cnt = 0;
     cnt = afk_var(vars);
-    printf("%d unused variable(-s):\n", cnt);
 
+    printf("%d unused variable(-s):\n", cnt);
     for (int k = 0; k < cnt; ++k)
     {
         printf("%s\n", vars[k]);
     }
     ///////////////////////////////////////////
+    cnt = vars_init(vars_init_);
+
+    printf("%d variable(-s) aren't initialised:\n", cnt);
+    for (int k = 0; k < cnt; ++k)
+    {
+        printf("%s\n", vars_init_[k]);
+    }
     ///////////////////////////////////////////
-    cnt = 0;
     cnt = looping();
 
     if (cnt == 1)
@@ -128,10 +136,10 @@ int main() {
         printf("Looping isn't here\n");
     }
     ///////////////////////////////////////////
-    cnt = useless_func(useless_fun);
+    cnt = useless_fun(useless_funс);
     printf("Useless func:\n");
     for (int i = 0; i < cnt; i++) {
-        printf("%s\n", useless_fun[i]);
+        printf("%s\n", useless_funс[i]);
     }
     //////////////////////////////////////////////
     printf("Maximum cycle deep: %d\n", max_deep);
