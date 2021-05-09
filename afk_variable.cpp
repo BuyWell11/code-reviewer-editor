@@ -13,6 +13,8 @@ int afk_var(char vars[][SIZE])
     int cnt = 0;
     int col = 0, colv = 0;
     int cntbr = 0;
+    int cntd = 0;
+    int cntpl = 0;
 
     while (!feof(inp))
     {
@@ -33,6 +35,15 @@ int afk_var(char vars[][SIZE])
 
                     temp[cntbr] = '\0';
                 }
+                else if (strchr(temp, ';') != 0)
+                {
+                    while (temp[cntd] != ';')
+                    {
+                        cntd++;
+                    }
+
+                    temp[cntd] = '\0';
+                }
 
                 strcpy(vars2[col], temp);
                 col++;
@@ -41,13 +52,22 @@ int afk_var(char vars[][SIZE])
 
         for (int k = 0; k < col; ++k)
         {
-            if (strcmp(temp, vars2[k]) == 0)
+            if (strstr(temp, vars2[k]) != NULL)
             {
-                num_var[k]++;
+                if ((strcmp(temp, vars2[k]) == 0) 
+                    || (strstr(temp, "++;") != 0 && strlen(vars2[k]) + 3 == strlen(temp)) 
+                    || (strchr(temp, '(') != 0 && strlen(vars2[k]) + 1 == strlen(temp))
+                    || (strchr(temp, ')') != 0 && strlen(vars2[k]) + 1 == strlen(temp))
+                    || (strchr(temp, ');') != 0 && strlen(vars2[k]) + 2 == strlen(temp)))
+                {
+                    num_var[k]++;
+                }
             }
         }
 
         cntbr = 0;
+        cntd = 0;
+
     }
 
     for (int k = 0; k < col; ++k)
@@ -59,6 +79,8 @@ int afk_var(char vars[][SIZE])
             colv++;
         }
     }
+
+    strcpy(vars[colv], vars2[0]);
 
     fclose(inp);
     return cnt;
